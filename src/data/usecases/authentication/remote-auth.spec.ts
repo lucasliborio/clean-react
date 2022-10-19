@@ -40,7 +40,9 @@ describe('Remote Authentication', () => {
     const authParams = mockAuthParams()
     const url = faker.internet.url()
     const { sut, httpPostClientSpy } = makeSut(url)
-    httpPostClientSpy.response.statusCode = 401
+    httpPostClientSpy.response = {
+      statusCode: HttpStatusCode.unauthorized
+    }
     const responseHttp = sut.auth(authParams)
     await expect(responseHttp).rejects.toThrow(new InvalidCredentialsError())
   })
@@ -48,7 +50,9 @@ describe('Remote Authentication', () => {
     const authParams = mockAuthParams()
     const url = faker.internet.url()
     const { sut, httpPostClientSpy } = makeSut(url)
-    httpPostClientSpy.response.statusCode = HttpStatusCode.badRequest
+    httpPostClientSpy.response = {
+      statusCode: HttpStatusCode.badRequest
+    }
     const responseHttp = sut.auth(authParams)
     await expect(responseHttp).rejects.toThrow(new UnexpectedError())
   })
