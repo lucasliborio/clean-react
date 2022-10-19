@@ -1,8 +1,10 @@
 import { Authentication, AuthParams } from "@/domain/usecases/authentication"
 import { HttpPostClient } from '@/data/protocols/http/http-post-client'
 import { AccountModel } from "@/domain/model/account-model"
-import { HttpResponse, HttpStatusCode } from "@/data/protocols/http/http-response"
+import { HttpStatusCode } from "@/data/protocols/http/http-response"
 import { InvalidCredentialsError } from "@/domain/errors/invalid-credentials-error"
+import { UnexpectedError } from "@/domain/errors/unexpected-error"
+
 export class RemoteAuthentication implements Authentication {
   constructor(
     private readonly url: string,
@@ -15,10 +17,12 @@ export class RemoteAuthentication implements Authentication {
       body: params
     })
     switch (responseHttp.statusCode) {
-      case HttpStatusCode.unathorized:
-        throw new InvalidCredentialsError()
-      default:
-        return Promise.resolve({ accessToken: 'token' })
+      case HttpStatusCode.ok: return Promise.resolve({
+        accessToken: 'token'
+      })
+      case HttpStatusCode.unathorized:throw new InvalidCredentialsError()
+      case HttpStatusCode.badRequest:
+      default:throw new UnexpectedError()
     }
   }
 }
