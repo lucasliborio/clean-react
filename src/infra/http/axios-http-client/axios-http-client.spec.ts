@@ -3,6 +3,7 @@ import { faker } from "@faker-js/faker"
 import { HttpPostParams } from "@/data/protocols/http"
 import { mockAxios } from "@/infra/test"
 import axios from "axios"
+import { mockPostParams } from "@/data/test/mock-http-post"
 
 afterEach(() => {
   jest.clearAllMocks()
@@ -21,10 +22,7 @@ const makeSut = (): SutTypes => {
     mockedAxios
   }
 }
-const mockPostParams = (): HttpPostParams<any> => ({
-  url: faker.internet.url(),
-  body: faker.datatype.json()
-})
+
 describe('AxiosHttpClient', () => {
   test('should call axios with correct URL and Body values', async () => {
     const { url, body } = mockPostParams()
