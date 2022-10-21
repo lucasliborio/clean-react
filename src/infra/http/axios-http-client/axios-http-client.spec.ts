@@ -1,40 +1,46 @@
 import { AxiosHttpClient } from "./axios-http-client"
 import { faker } from "@faker-js/faker"
-import axios from "axios"
 import { HttpPostParams } from "@/data/protocols/http"
+import { mockAxios } from "@/infra/test"
+import axios from "axios"
+
+afterEach(() => {
+  jest.clearAllMocks()
+})
 
 jest.mock('axios')
-const mockedAxios = axios as jest.Mocked<typeof axios>
-
-const mockedAxiosResult = {
-  data: { name: "Lucas" },
-  status: faker.datatype.number()
+type SutTypes = {
+  sut: AxiosHttpClient
+  mockedAxios: jest.Mocked<typeof axios>
 }
-mockedAxios.post.mockResolvedValue(mockedAxiosResult)
-
-const makeSut = (): AxiosHttpClient => {
-  return new AxiosHttpClient()
+const makeSut = (): SutTypes => {
+  const sut = new AxiosHttpClient()
+  const mockedAxios = mockAxios()
+  return {
+    sut,
+    mockedAxios
+  }
 }
 const mockPostParams = (): HttpPostParams<any> => ({
   url: faker.internet.url(),
-  body: {
-    name: faker.internet.userName()
-  }
+  body: faker.datatype.json()
 })
 describe('AxiosHttpClient', () => {
   test('should call axios with correct URL and Body values', async () => {
     const { url, body } = mockPostParams()
-    const sut = makeSut()
+    const { sut, mockedAxios } = makeSut()
     await sut.post({ url, body })
     expect(mockedAxios.post).toHaveBeenCalledWith(url, body)
   })
+  // eslint-disable-next-line @typescript-eslint/require-await
   test('should call axios with correct URL and Body values', async () => {
     const { url, body } = mockPostParams()
-    const sut = makeSut()
-    const httpResponse = await sut.post({ url, body })
-    expect(httpResponse).toEqual({
-      body: mockedAxiosResult.data,
-      statusCode: mockedAxiosResult.status
+    const { sut, mockedAxios } = makeSut()
+    const promise = await sut.post({ url, body })
+    const { data, status } = await mockedAxios.post.mock.results[0].value
+    expect(promise).toEqual({
+      body: data,
+      statusCode: status
     })
   })
 })
