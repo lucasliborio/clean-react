@@ -34,8 +34,10 @@ module.exports = {
     }]
   },
   devServer: {
-    contentBase: "./build",
-    writeToDisk: true,
+    devMiddleware:{
+      writeToDisk: true,
+    },
+    static: "./build",
     historyApiFallback: true
   },
   externals: {
