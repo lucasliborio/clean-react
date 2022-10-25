@@ -115,18 +115,15 @@ button {
       justify-content: center;
       align-items: center;
       .spinner {
-        display: none;
+       
         margin-top: 24px;
       }
       .error {
-        display: none;
+      
         margin-top: 24px;
       }
     }
   }
 
-  .footer {
-    height: 56px;
-    background-color: $primary;
-  }
+ 
 }
