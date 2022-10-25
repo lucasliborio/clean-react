@@ -21,7 +21,7 @@ module.exports = {
       exclude: /node_modules/
     }, {
       test: /\.scss$/,
-      use:[{
+      use: [{
         loader: "style-loader"
       }, {
         loader: 'css-loader',
@@ -34,7 +34,7 @@ module.exports = {
     }]
   },
   devServer: {
-    devMiddleware:{
+    devMiddleware: {
       writeToDisk: true,
     },
     static: "./build",
