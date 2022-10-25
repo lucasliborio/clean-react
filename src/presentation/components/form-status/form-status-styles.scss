@@ -1,0 +1,18 @@
+@import "../../styles/color.scss";
+
+.errorWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .spinner {
+
+    margin-top: 24px;
+  }
+
+  .error {
+
+    margin-top: 24px;
+  }
+}
