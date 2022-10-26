@@ -4,6 +4,9 @@ module.exports = {
     '<rootDir>/src/**/*.{ts,tsx}',
     '!**/*.d.ts'
   ],
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/'
+  ],
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',
   transform: {

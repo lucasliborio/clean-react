@@ -6,7 +6,7 @@ type Props = {
   className: string
 }
 // eslint-disable-next-line react/display-name
-const LoginHeader: React.FC = memo(() => {
+const Header: React.FC = memo(() => {
   return (
     <header className={Style.header}>
       <Logo />
@@ -16,5 +16,5 @@ const LoginHeader: React.FC = memo(() => {
 })
 
 export {
-  LoginHeader
+  Header
 }

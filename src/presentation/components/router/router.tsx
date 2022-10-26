@@ -1,11 +1,13 @@
 import React from "react"
-import { createBrowserRouter } from "react-router-dom"
-import { Login } from "../../pages"
-import "@/presentation/styles/globals.scss"
+import { BrowserRouter, createBrowserRouter, Route, Routes } from "react-router-dom"
+import { LoginPage } from "../../pages/login/login"
 
-export const Router = createBrowserRouter([
-  {
-    path: "/login",
-    element: <Login />
-  }
-])
+export const Router: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
