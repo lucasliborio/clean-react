@@ -21,7 +21,7 @@ export const LoginPage: React.FC = () => {
           <h2>Login</h2>
           <CustomInput type="email" name="email" placeholder="Enter your email" />
           <CustomInput type="password" name="password" placeholder="Enter your password" />
-          <button type="submit">LogIn</button>
+          <button data-testid="submit-button" disabled type="submit">LogIn</button>
           <span className={Style.link}>Sign In</span>
           <FormStatus />
         </form>
