@@ -4,10 +4,7 @@
       "version": "detect"
     }
   },
-  "extends": [
-    "standard-with-typescript",
-    "plugin:react/recommended"
-  ],
+  "extends": ["standard-with-typescript", "plugin:react/recommended"],
   "plugins": ["react"],
   "parserOptions": {
     "project": "./tsconfig-eslint.json"
@@ -21,6 +18,9 @@
     "space-before-function-paren": "off",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "@typescript-eslint/member-delimiter-style": "off",
+    "semi": "off",
+    "comma-dangle": "off"
   }
 }
